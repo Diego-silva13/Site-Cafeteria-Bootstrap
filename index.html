@@ -1,61 +1,139 @@
 <!doctype html>
-<html>
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
+    <title>Drip Coffee</title>
+ 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+ 
     <style>
+      /* ── Tipografia ── */
       body {
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: 'DM Sans', Arial, sans-serif;
       }
-
+ 
+      h1, h2, h3, h4, h5, .navbar-brand {
+        font-family: 'Playfair Display', serif;
+      }
+ 
+      /* ── Navbar ── */
+      .navbar img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+        border-radius: 50%;
+      }
+ 
+      @media (max-width: 991px) {
+        .navbar-collapse {
+          padding: 10px 0;
+        }
+        .navbar-nav .nav-link {
+          text-align: center;
+          padding: 8px 0;
+        }
+      }
+ 
+      /* ── Carousel ── */
+      .carousel-item img {
+        width: 100%;
+        height: clamp(220px, 45vw, 480px);
+        object-fit: cover;
+      }
+ 
+      .carousel-caption {
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 10px;
+        padding: 10px 18px;
+      }
+ 
+      .carousel-caption h2 {
+        font-size: clamp(1rem, 3vw, 2rem);
+        margin: 0;
+      }
+ 
+      /* ── Sobre ── */
+      #sobre p {
+        line-height: 1.6;
+      }
+ 
+      .sobre-img {
+        max-height: 350px;
+        object-fit: cover;
+        width: 100%;
+      }
+ 
+      @media (max-width: 767px) {
+        #sobre .col-md-6 + .col-md-6 {
+          margin-top: 24px;
+        }
+      }
+ 
+      /* ── Cardápio ── */
       .card-img-top {
         height: 200px;
         object-fit: cover;
       }
-
-      .navbar img {
-        width: 90px;
-        height: 80px;
-      }
-
-      .carousel-item img {
-        width: 100%;
-        height: 400px;
-        object-fit: cover;
-      }
-
-      .carousel-caption {
-        background: rgba(0, 0, 0, 0.4);
-        border-radius: 10px;
-        padding: 10px;
-      }
-
+ 
       .icon {
         margin-top: 10px;
       }
-
-      #sobre p {
-        line-height: 1.6;
+ 
+      /* ── Depoimentos ── */
+      #depoimentos {
+        background-color: #fdf6f0;
       }
-
-      .sobre-img {
-        max-height: 350px;
-        object-fit: cover;
+ 
+      .depoimento-card {
+        background: #ffffff;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        height: 100%;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
       }
-
+ 
+      .depoimento-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.13);
+      }
+ 
+      .depoimento-card .estrelas {
+        color: #e0a827;
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+      }
+ 
+      .depoimento-card p {
+        color: #555;
+        font-style: italic;
+        line-height: 1.7;
+      }
+ 
+      .depoimento-card .cliente {
+        margin-top: 16px;
+        font-weight: bold;
+        color: #3c2a21;
+      }
+ 
+      .depoimento-card .aspas {
+        font-size: 3rem;
+        color: #6e4d3e;
+        line-height: 1;
+        margin-bottom: -10px;
+        display: block;
+      }
+ 
+      /* ── Contato ── */
       .form-cafe {
         background: #ffffff;
         padding: 30px;
         border-radius: 15px;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       }
-
+ 
       .btn-enviar {
         background-color: #6e4d3e;
         color: #ffffff;
@@ -64,172 +142,126 @@
         padding: 12px;
         transition: 0.3s;
       }
-
+ 
       .btn-enviar:hover {
         background-color: #3c2a21;
         color: #ffffff;
       }
-
+ 
+      /* ── Footer ── */
       .footer-cafeteria {
         background-color: #6e4d3e;
         color: #f5f5dc;
         padding: 40px 0 20px;
       }
-
+ 
       .footer-info h5 {
         color: #967e76;
         font-weight: bold;
         text-transform: uppercase;
         margin-bottom: 15px;
       }
-
+ 
       .footer-info p {
         margin-bottom: 5px;
       }
-
-      /* ── DEPOIMENTOS ── */
-      #depoimentos {
-        background-color: #fdf6f0;
+ 
+      @media (max-width: 767px) {
+        .footer-cafeteria .col-md-4 {
+          text-align: center !important;
+        }
       }
-
-      .depoimento-card {
-        background: #ffffff;
-        border-radius: 15px;
-        padding: 30px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-        height: 100%;
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
+ 
+      /* ── Animação fade-up ── */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.55s ease, transform 0.55s ease;
       }
-
-      .depoimento-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.13);
-      }
-
-      .depoimento-card .estrelas {
-        color: #e0a827;
-        font-size: 1.1rem;
-        margin-bottom: 12px;
-      }
-
-      .depoimento-card p {
-        color: #555;
-        font-style: italic;
-        line-height: 1.7;
-      }
-
-      .depoimento-card .cliente {
-        margin-top: 16px;
-        font-weight: bold;
-        color: #3c2a21;
-      }
-
-      .depoimento-card .aspas {
-        font-size: 3rem;
-        color: #6e4d3e;
-        line-height: 1;
-        margin-bottom: -10px;
-        display: block;
+ 
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
       }
     </style>
   </head>
-
+ 
   <body>
+ 
     <!-- Navbar -->
-    <nav
-      class="navbar navbar-expand-lg navbar-dark"
-      style="background-color: #6e4d3e"
-    >
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #6e4d3e">
       <div class="container">
         <a class="navbar-brand d-flex align-items-center" href="#">
           <img src="img/cafe.png" alt="logo" class="me-2" />
           Drip Coffee
         </a>
-
-        <button
-          class="navbar-toggler"
-          data-bs-toggle="collapse"
-          data-bs-target="#menu"
-        >
+ 
+        <button class="navbar-toggler" type="button"
+          data-bs-toggle="collapse" data-bs-target="#menu"
+          aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
           <span class="navbar-toggler-icon"></span>
         </button>
-
+ 
         <div class="collapse navbar-collapse" id="menu">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a href="#" class="nav-link">Início</a>
-            </li>
-            <li class="nav-item">
-              <a href="#sobre" class="nav-link">Sobre</a>
-            </li>
-            <li class="nav-item">
-              <a href="#cardapio" class="nav-link">Cardápio</a>
-            </li>
-            <li class="nav-item">
-              <a href="#depoimentos" class="nav-link">Depoimento</a>
-            </li>
-            <li class="nav-item">
-              <a href="#contato" class="nav-link">Contato</a>
-            </li>
+            <li class="nav-item"><a href="#"            class="nav-link">Início</a></li>
+            <li class="nav-item"><a href="#sobre"       class="nav-link">Sobre</a></li>
+            <li class="nav-item"><a href="#cardapio"    class="nav-link">Cardápio</a></li>
+            <li class="nav-item"><a href="#depoimentos" class="nav-link">Depoimento</a></li>
+            <li class="nav-item"><a href="#contato"     class="nav-link">Contato</a></li>
           </ul>
         </div>
       </div>
     </nav>
-
+ 
     <!-- Carrossel -->
     <div id="carrossel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carrossel" data-bs-slide-to="0" class="active"></button>
+        <button type="button" data-bs-target="#carrossel" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#carrossel" data-bs-slide-to="2"></button>
+      </div>
+ 
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="img/cafeteria.jpg" class="d-block w-100" alt="" />
+          <img src="img/cafeteria.jpg" class="d-block w-100" alt="Cafeteria" />
           <div class="carousel-caption">
             <h2>O melhor café da cidade</h2>
           </div>
         </div>
-
+ 
         <div class="carousel-item">
-          <img src="img/acompahamentos.jpg" class="d-block w-100" alt="" />
+          <img src="img/acompahamentos.jpg" class="d-block w-100" alt="Acompanhamentos" />
           <div class="carousel-caption">
             <h2>Deliciosos acompanhamentos</h2>
           </div>
         </div>
-
+ 
         <div class="carousel-item">
-          <img src="img/musicas.jpg" class="d-block w-100" alt="" />
+          <img src="img/musicas.jpg" class="d-block w-100" alt="Música ao vivo" />
           <div class="carousel-caption">
             <h2>Música ao vivo aos sábados</h2>
           </div>
         </div>
       </div>
-
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carrossel"
-        data-bs-slide="prev"
-      >
+ 
+      <button class="carousel-control-prev" type="button" data-bs-target="#carrossel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Anterior</span>
       </button>
-
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carrossel"
-        data-bs-slide="next"
-      >
+      <button class="carousel-control-next" type="button" data-bs-target="#carrossel" data-bs-slide="next">
         <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Próximo</span>
       </button>
     </div>
-
+ 
     <!-- Sobre -->
     <section id="sobre" class="py-5">
       <div class="container">
-        <h2 class="text-center mb-4">Sobre Nós</h2>
-
+        <h2 class="text-center mb-4 fade-up">Sobre Nós</h2>
+ 
         <div class="row align-items-center">
-          <!-- TEXTO -->
-          <div class="col-md-6">
+          <div class="col-md-6 fade-up">
             <p>
               Fundado em 2020, o Drip Coffee nasceu com a missão de proporcionar
               uma experiência única para os amantes de café, trabalhando com
@@ -245,33 +277,29 @@
             </p>
             <p><strong>Venha nos visitar!</strong></p>
           </div>
-
-          <div class="col-md-6 text-center">
+ 
+          <div class="col-md-6 text-center fade-up">
             <img
               src="img/drip.coffe.png"
               alt="Drip Coffee"
-              class="img-fluid rounded shadow sobre-img w-100"
+              class="img-fluid rounded shadow sobre-img"
               style="height: auto; object-fit: cover"
             />
           </div>
         </div>
       </div>
     </section>
-
+ 
     <!-- Cardápio -->
     <section id="cardapio" class="py-5 bg-light">
       <div class="container">
-        <h2 class="text-center mb-4">Nosso Cardápio</h2>
-
-        <div class="row">
-          <div class="col-md-4 mb-3">
+        <h2 class="text-center mb-4 fade-up">Nosso Cardápio</h2>
+ 
+        <div class="row g-3 justify-content-center">
+          <div class="col-sm-6 col-md-4 fade-up">
             <div class="card text-center h-100">
               <div class="card-body">
-                <img
-                  src="img/Café-expresso-1.jpg"
-                  class="card-img-top"
-                  alt=""
-                />
+                <img src="img/Café-expresso-1.jpg" class="card-img-top" alt="Expresso" />
                 <h3 class="icon">☕</h3>
                 <h5>Expresso</h5>
                 <p>Café puro</p>
@@ -280,11 +308,11 @@
               </div>
             </div>
           </div>
-
-          <div class="col-md-4 mb-3">
+ 
+          <div class="col-sm-6 col-md-4 fade-up">
             <div class="card text-center h-100">
               <div class="card-body">
-                <img src="img/cappucino.webp" class="card-img-top" alt="" />
+                <img src="img/cappucino.webp" class="card-img-top" alt="Cappuccino" />
                 <h3 class="icon">🥛☕</h3>
                 <h5>Cappuccino</h5>
                 <p>Com leite</p>
@@ -293,11 +321,11 @@
               </div>
             </div>
           </div>
-
-          <div class="col-md-4 mb-3">
+ 
+          <div class="col-sm-6 col-md-4 fade-up">
             <div class="card text-center h-100">
               <div class="card-body">
-                <img src="img/cafe_gelado.webp" class="card-img-top" alt="" />
+                <img src="img/cafe_gelado.webp" class="card-img-top" alt="Café Gelado" />
                 <h3 class="icon">🧊☕</h3>
                 <h5>Café Gelado</h5>
                 <p>Refrescante</p>
@@ -309,88 +337,67 @@
         </div>
       </div>
     </section>
-
+ 
     <!-- Depoimentos -->
     <section id="depoimentos" class="py-5">
       <div class="container">
-        <h2 class="text-center mb-2">O que nossos clientes dizem</h2>
-        <p class="text-center text-muted mb-5">
+        <h2 class="text-center mb-2 fade-up">O que nossos clientes dizem</h2>
+        <p class="text-center text-muted mb-5 fade-up">
           Opiniões reais de quem já visitou o Drip Coffee
         </p>
-
+ 
         <div class="row g-4">
-          <div class="col-md-4">
+          <div class="col-sm-6 col-md-4 fade-up">
             <div class="depoimento-card">
               <span class="aspas">"</span>
               <div class="estrelas">★★★★★</div>
-              <p>
-                O melhor café que já tomei na vida! O ambiente é incrível e o
-                atendimento é super atencioso. Virei cliente fiel!
-              </p>
+              <p>O melhor café que já tomei na vida! O ambiente é incrível e o atendimento é super atencioso. Virei cliente fiel!</p>
               <div class="cliente">— Ana Paula S.</div>
             </div>
           </div>
-
-          <div class="col-md-4">
+ 
+          <div class="col-sm-6 col-md-4 fade-up">
             <div class="depoimento-card">
               <span class="aspas">"</span>
               <div class="estrelas">★★★★★</div>
-              <p>
-                Adoro vir estudar aqui aos finais de semana. O cappuccino é
-                maravilhoso e a música ao vivo no sábado é um diferencial!
-              </p>
+              <p>Adoro vir estudar aqui aos finais de semana. O cappuccino é maravilhoso e a música ao vivo no sábado é um diferencial!</p>
               <div class="cliente">— Carlos M.</div>
             </div>
           </div>
-
-          <div class="col-md-4">
+ 
+          <div class="col-sm-6 col-md-4 fade-up">
             <div class="depoimento-card">
               <span class="aspas">"</span>
               <div class="estrelas">★★★★☆</div>
-              <p>
-                Café gelado perfeito para os dias quentes de São Paulo. Lugar
-                charmoso e com ótimos preços. Recomendo muito!
-              </p>
+              <p>Café gelado perfeito para os dias quentes de São Paulo. Lugar charmoso e com ótimos preços. Recomendo muito!</p>
               <div class="cliente">— Fernanda L.</div>
             </div>
           </div>
         </div>
       </div>
     </section>
-
+ 
     <!-- Contato -->
     <section id="contato" class="py-5">
       <div class="container">
-        <div class="row justify-content-center text-center mb-4">
+        <div class="row justify-content-center text-center mb-4 fade-up">
           <div class="col-md-6">
             <h2 style="color: #3c2a21">Fale com o Barista</h2>
             <p>Mande sua dúvida ou sugestão para nossa equipe.</p>
           </div>
         </div>
-
+ 
         <div class="row justify-content-center">
-          <div class="col-md-7">
+          <div class="col-md-7 fade-up">
             <form class="form-cafe">
               <div class="mb-3">
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Seu Nome"
-                />
+                <input type="text" class="form-control" placeholder="Seu Nome" />
               </div>
               <div class="mb-3">
-                <input
-                  type="email"
-                  class="form-control"
-                  placeholder="Seu E-mail"
-                />
+                <input type="email" class="form-control" placeholder="Seu E-mail" />
               </div>
               <div class="mb-3">
-                <textarea
-                  class="form-control"
-                  rows="4"
-                  placeholder="Sua mensagem..."
-                ></textarea>
+                <textarea class="form-control" rows="4" placeholder="Sua mensagem..."></textarea>
               </div>
               <button type="button" class="btn btn-enviar w-100">
                 ENVIAR AGORA
@@ -400,7 +407,8 @@
         </div>
       </div>
     </section>
-
+ 
+    <!-- Footer -->
     <footer class="footer-cafeteria">
       <div class="container">
         <div class="row">
@@ -408,14 +416,14 @@
             <h4 class="fw-bold">DRIP COFFEE</h4>
             <p>O melhor café, torrado artesanalmente para você.</p>
           </div>
-
+ 
           <div class="col-md-4 mb-4 footer-info text-center text-md-start">
             <h5>Onde Estamos</h5>
             <p>📍 Rua das Flores, 123</p>
             <p>🏢 Bairro Central - São Paulo/SP</p>
             <p>📞 (11) 1234-5678</p>
           </div>
-
+ 
           <div class="col-md-4 mb-4 footer-info text-center text-md-start">
             <h5>Horários de Funcionamento</h5>
             <p>☕ Seg a Sex: 08h às 20h</p>
@@ -423,18 +431,28 @@
             <p>🚫 Domingos: Fechado</p>
           </div>
         </div>
-
-        <div
-          class="text-center mt-4 pt-3"
-          style="border-top: 1px solid rgba(255, 255, 255, 0.1)"
-        >
-          <p class="small mb-0">
-            © 2026 Drip Coffee - Todos os direitos reservados.
-          </p>
+ 
+        <div class="text-center mt-4 pt-3" style="border-top: 1px solid rgba(255,255,255,0.1)">
+          <p class="small mb-0">© 2026 Drip Coffee - Todos os direitos reservados.</p>
         </div>
       </div>
     </footer>
-
+ 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+ 
+    <script>
+      // Animação fade-up ao rolar a página
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+ 
+      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+ 
   </body>
 </html>
